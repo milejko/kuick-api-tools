@@ -12,7 +12,8 @@
     ],
     "require": {
         "php": ">=8.2.0",
-        "kuick/framework": "^2.8"
+        "kuick/framework": "^2.8",
+        "zircote/swagger-php": "^6.0"
     },
     "scripts": {
         "fix:phpcbf": "phpcbf --standard=PSR12 src tests",

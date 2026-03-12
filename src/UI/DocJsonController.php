@@ -41,7 +41,7 @@ final class DocJsonController
      */
     public function __invoke(): JsonResponse
     {
-        $openapi = Generator::scan([$this->projectDir . self::SOURCE_PATH]);
+        $openapi = (new Generator())->generate([$this->projectDir . self::SOURCE_PATH]);
         return new JsonResponse(json_decode($openapi->toJson(), true));
     }
 }
