@@ -1,0 +1,43 @@
+{
+    "name": "kuick/sentry",
+    "type": "library",
+    "description": "Kuick Sentry provides a bridge to Sentry for Kuick applications.",
+    "keywords": ["kuick", "sentry"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mariusz Miłejko",
+            "email": "mariusz@milejko.pl"
+        }
+    ],
+    "require": {
+        "php": ">=8.3.0",
+        "kuick/framework": "^2.7"
+    },
+    "scripts": {
+        "fix:phpcbf": "phpcbf --standard=PSR12 src tests",
+        "test:phpstan": "XDEBUG_MODE=off phpstan --level=5 --no-progress --memory-limit=512M analyse src tests",
+        "test:phpcs": "phpcs -n --standard=PSR12 ./src ./tests",
+        "test:phpmd": "phpmd src tests text cleancode,codesize,controversial,design,naming,unusedcode",
+        "test:phpunit": "XDEBUG_MODE=coverage phpunit",
+        "test:all": [
+            "@test:phpcs",
+            "@test:phpstan",
+            "@test:phpmd",
+            "@test:phpunit"
+        ]
+    },
+    "autoload": {
+        "psr-4": {
+            "Kuick\\ApiTools\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kuick\\Tests\\ApiTools\\": "tests"
+        }
+    },
+    "require-dev": {
+        "kuick/qa-toolkit": "^2.0"
+    }
+}
