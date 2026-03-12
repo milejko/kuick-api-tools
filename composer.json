@@ -1,8 +1,8 @@
 {
-    "name": "kuick/sentry",
+    "name": "kuick/api-tools",
     "type": "library",
-    "description": "Kuick Sentry provides a bridge to Sentry for Kuick applications.",
-    "keywords": ["kuick", "sentry"],
+    "description": "Kuick API Tools provides a set of tools for Kuick applications.",
+    "keywords": ["kuick", "api", "tools"],
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
     ],
     "require": {
         "php": ">=8.3.0",
-        "kuick/framework": "^2.7"
+        "kuick/framework": "^2.8"
     },
     "scripts": {
         "fix:phpcbf": "phpcbf --standard=PSR12 src tests",
