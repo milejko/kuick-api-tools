@@ -13,40 +13,40 @@ namespace Kuick\ApiTools\UI;
 use DI\Container;
 use Kuick\Http\Message\JsonResponse;
 use Psr\Http\Message\ServerRequestInterface;
-use OpenApi\Attributes as OAA;
+use OpenApi\Attributes as OA;
 
-#[OAA\Get(
+#[OA\Get(
     path: '/api/ops',
     description: 'Returns environment variables',
     tags: ['API'],
     security: [['Bearer Token' => []]],
     responses: [
-        new OAA\Response(
+        new OA\Response(
             response: JsonResponse::HTTP_OK,
             description: 'Array with environment variables',
-            content: new OAA\JsonContent(properties: [
-                new OAA\Property(property: 'request', type: 'object'),
-                new OAA\Property(property: 'environment', type: 'object'),
-                new OAA\Property(property: 'di-config', type: 'object'),
-                new OAA\Property(property: 'opcache-status', type: 'object'),
-                new OAA\Property(property: 'apcu-status', type: 'object'),
-                new OAA\Property(property: 'php-version'),
-                new OAA\Property(property: 'php-config'),
-                new OAA\Property(property: 'php-loaded-extensions'),
+            content: new OA\JsonContent(properties: [
+                new OA\Property(property: 'request', type: 'object'),
+                new OA\Property(property: 'environment', type: 'object'),
+                new OA\Property(property: 'di-config', type: 'object'),
+                new OA\Property(property: 'opcache-status', type: 'object'),
+                new OA\Property(property: 'apcu-status', type: 'object'),
+                new OA\Property(property: 'php-version'),
+                new OA\Property(property: 'php-config'),
+                new OA\Property(property: 'php-loaded-extensions'),
             ])
         ),
-        new OAA\Response(
+        new OA\Response(
             response: JsonResponse::HTTP_UNAUTHORIZED,
             description: 'Token is not present',
-            content: new OAA\JsonContent(properties: [
-                new OAA\Property(property: "error", type: "string"),
+            content: new OA\JsonContent(properties: [
+                new OA\Property(property: "error", type: "string"),
             ])
         ),
-        new OAA\Response(
+        new OA\Response(
             response: JsonResponse::HTTP_FORBIDDEN,
             description: 'Token is invalid',
-            content: new OAA\JsonContent(properties: [
-                new OAA\Property(property: "error", type: "string"),
+            content: new OA\JsonContent(properties: [
+                new OA\Property(property: "error", type: "string"),
             ])
         ),
     ]

@@ -12,25 +12,26 @@ namespace Kuick\ApiTools\UI;
 
 use DI\Attribute\Inject;
 use Kuick\Http\Message\JsonResponse;
-use OpenApi\Attributes as OAA;
+use OpenApi\Attributes as OA;
 use OpenApi\Generator;
 
-#[OAA\Info(title: 'Kuick Framework API', version: '1.2')]
-#[OAA\Get(
+#[OA\Info(title: 'Kuick Framework API', version: '2.8')]
+#[OA\Get(
     path: '/api/doc.json',
     description: 'Returns OpenApi Documentation JSON',
     tags: ['API'],
     responses: [
-        new OAA\Response(
+        new OA\Response(
             response: JsonResponse::HTTP_OK,
-            description: 'Array with environment variables',
-            content: new OAA\JsonContent()
+            description: 'Current OpenAPI documentation in JSON format',
+            content: new OA\JsonContent()
         ),
     ]
 )]
 final class DocJsonController
 {
-    private const SOURCE_PATH = '/src';
+    private const string SOURCE_PATH = '/src';
+    private const string VENDOR_SOURCE_PATH = '/vendor/kuick-api/tools/src';
 
     public function __construct(#[Inject('app.projectDir')] private string $projectDir)
     {
@@ -41,7 +42,10 @@ final class DocJsonController
      */
     public function __invoke(): JsonResponse
     {
-        $openapi = (new Generator())->generate([$this->projectDir . self::SOURCE_PATH]);
+        $openapi = (new Generator())->generate([
+            $this->projectDir . self::SOURCE_PATH,
+            $this->projectDir . self::VENDOR_SOURCE_PATH,
+        ]);
         return new JsonResponse(json_decode($openapi->toJson(), true));
     }
 }
