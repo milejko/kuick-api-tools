@@ -31,7 +31,7 @@ use OpenApi\Generator;
 final class DocJsonController
 {
     private const string SOURCE_PATH = '/src';
-    private const string VENDOR_SOURCE_PATH = '/vendor/kuick-api-tools/src';
+    private const string VENDOR_SOURCE_PATH = '/vendor/kuick/api-tools/src';
 
     public function __construct(#[Inject('app.projectDir')] private string $projectDir)
     {
