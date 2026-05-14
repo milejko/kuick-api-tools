@@ -13,12 +13,12 @@ namespace Kuick\ApiTools\UI;
 use DI\Attribute\Inject;
 use Kuick\Http\Message\JsonResponse;
 use OpenApi\Attributes as OA;
+use OpenApi\Attributes\Info;
 use OpenApi\Generator;
 
-#[OA\Info(title: 'Kuick Framework API', version: '2.8')]
 #[OA\Get(
     path: '/api/doc.json',
-    description: 'Returns OpenApi Documentation JSON',
+    description: 'Returns the OpenAPI documentation in JSON format',
     tags: ['API'],
     responses: [
         new OA\Response(
@@ -33,8 +33,12 @@ final class DocJsonController
     private const string SOURCE_PATH = '/src';
     private const string VENDOR_SOURCE_PATH = '/vendor/kuick/api-tools/src';
 
-    public function __construct(#[Inject('app.projectDir')] private string $projectDir)
-    {
+    public function __construct(
+        #[Inject('app.projectDir')] private string $projectDir,
+        #[Inject('api.openapi.title')] private string $openApiTitle,
+        #[Inject('api.openapi.description')] private string $openApiDescription,
+        #[Inject('api.openapi.version')] private string $openApiVersion,
+    ) {
     }
 
     /**
@@ -46,6 +50,13 @@ final class DocJsonController
             $this->projectDir . self::SOURCE_PATH,
             $this->projectDir . self::VENDOR_SOURCE_PATH,
         ]);
+        // override info from attributes with values from configuration
+        if (!($openapi->info instanceof Info)) {
+            $openapi->info = new Info(title: $this->openApiTitle, version: $this->openApiVersion);
+        }
+        $openapi->info->title = $this->openApiTitle;
+        $openapi->info->description = $this->openApiDescription;
+        $openapi->info->version = $this->openApiVersion;
         return new JsonResponse(json_decode($openapi->toJson(), true));
     }
 }
