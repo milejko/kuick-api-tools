@@ -16,7 +16,11 @@ use OpenApi\Attributes as OA;
 use OpenApi\Attributes\Info;
 use OpenApi\Generator;
 
-#[OA\Info()]
+#[OA\Info(
+    title: 'Kuick API Tools',
+    description: 'Kuick API Tools is a set of tools for building APIs with the Kuick framework.',
+    version: '3.1.0'
+)]
 #[OA\Get(
     path: '/api/doc.json',
     description: 'Returns the OpenAPI documentation in JSON format',
