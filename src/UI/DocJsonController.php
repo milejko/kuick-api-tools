@@ -16,6 +16,7 @@ use OpenApi\Attributes as OA;
 use OpenApi\Attributes\Info;
 use OpenApi\Generator;
 
+#[OA\Info()]
 #[OA\Get(
     path: '/api/doc.json',
     description: 'Returns the OpenAPI documentation in JSON format',
